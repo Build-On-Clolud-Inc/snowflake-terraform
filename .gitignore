@@ -1,0 +1,4 @@
+*.terraform*
+*.tfstate
+*.tfstate.*
+snowflake_tf_snow_key.*
