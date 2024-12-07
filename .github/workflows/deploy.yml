@@ -25,10 +25,10 @@ jobs:
     - name: Terraform Plan
       run: terraform plan
       env:
-        SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USERNAME }}
-        SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
-        SNOWFLAKE_ORGANIZATION_NAME : ${{ secrets.SNOWFLAKE_ORGANIZATION_NAME }}
-        SNOWFLAKE_ACCOUNT_NAME : ${{ secrets.SNOWFLAKE_ACCOUNT_NAME }}
+        SNOWFLAKE_USER: 'github_action_user_ehsan'
+        SNOWFLAKE_PASSWORD: 'DemoAzure@654321'
+        SNOWFLAKE_ORGANIZATION_NAME : 'CVFSCHR'
+        SNOWFLAKE_ACCOUNT_NAME : 'CE00195'
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/sbx' && github.event_name == 'push'  
