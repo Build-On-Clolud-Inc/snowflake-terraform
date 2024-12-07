@@ -1,4 +1,4 @@
-name: Deploy to SnowFlake
+name: Deploy to Snowflake
 
 on:
   push:
