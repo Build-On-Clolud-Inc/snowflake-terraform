@@ -1,7 +1,7 @@
 provider "snowflake" {
-  organization_name = "organization_name"
-  account_name = "account_name"
-  user = "user"
-  password = "password"
+  organization_name = "CVFSCHR"
+  account_name = "CE00195"
+  user = "github_action_user_ehsan"
+  password = "DemoAzure@654321"
   role     = "SYSADMIN"
 }
