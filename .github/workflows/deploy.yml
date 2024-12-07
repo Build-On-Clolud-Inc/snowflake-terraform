@@ -23,6 +23,9 @@ jobs:
 
     - name: Terraform Plan
       run: terraform plan
+      env:
+        TF_VAR_SNOWFLAKE_USERNAME: ${{ secrets.SNOWFLAKE_USERNAME }}
+        TF_VAR_SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
