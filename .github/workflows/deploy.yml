@@ -6,6 +6,11 @@ on:
       - sbx
   pull_request:
 
+permissions:
+      id-token: write
+      contents: write
+      pull-requests: write
+      
 jobs:
   deploy:
     runs-on: ubuntu-latest
