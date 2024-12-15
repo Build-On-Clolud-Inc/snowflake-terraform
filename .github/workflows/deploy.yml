@@ -4,10 +4,21 @@ on:
   push:
     branches:
       - sbx
+  pull_request:
+
+permissions:
+      id-token: write
+      contents: write
+      pull-requests: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: sbx
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}    
 
     steps:
     - name: Checkout repository
@@ -17,6 +28,13 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.8.5
+
+    - name: 'Az CLI login'
+      uses: azure/login@v1
+      with:
+          client-id: ${{ secrets.ARM_CLIENT_ID }}
+          tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
     - name: Terraform Init
       run: terraform init
@@ -30,6 +48,7 @@ jobs:
         SNOWFLAKE_ACCOUNT_NAME : ${{ secrets.SNOWFLAKE_ACCOUNT_NAME }}
 
     - name: Terraform Apply
+      if: github.ref == 'refs/heads/sbx' && github.event_name == 'push'  
       run: terraform apply -auto-approve
       env:
         SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USERNAME }}
